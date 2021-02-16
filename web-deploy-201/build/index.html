@@ -48,7 +48,7 @@
 <p><a href="#_creating_some_directories">Creating some directories</a></p>
 </li>
 <li>
-<p><a href="#_running_a_sample_api_optional">optional</a></p>
+<p><a href="#Running a sample api - optional">optional</a></p>
 </li>
 </ul>
 </div>
@@ -78,8 +78,8 @@
 </div>
 <h1 id="_quick_foreword" class="sect0">Quick Foreword</h1>
 <div class="paragraph">
-<p>This is not a "<em>how to get your simple static webpage hosted somewhere for free</em>" quick guide. This guide will be teaching how to setup your own server, for ease of use and future deployments. If you are looking for that feel free to checkout our <a href="https://google.com/">beginner course</a>. To follow along with this a remote server is strongly recommended, feel free to use a local server if you fancy. We will be teaching you how to setup a new remote server, if you currently do not own one. For the sake of this course, we will be sticking to a standard Ubuntu 18.04 server.
-If you have knowledge of other linux based distrobutions like debian, centOs, arch, etc. feel free to use those.
+<p>This is not a "<em>how to get your simple static webpage hosted somewhere for free</em>" quick guide. This guide will be teaching how to set up your own server, for ease of use and future deployments. If you are looking for that feel free to check out our <a href="https://google.com/">beginner course</a>. To follow along with this a remote server is strongly recommended, feel free to use a local server if you fancy. We will be teaching you how to set up a new remote server if you currently do not own one. For the sake of this course, we will be sticking to a standard Ubuntu 18.04 server.
+If you know other Linux-based distributions like Debian, Centos, arch, etc. feel free to use those.
 This course will roughly take about 60min.</p>
 </div>
 <h1 id="_setup" class="sect0">Setup</h1>
@@ -103,8 +103,8 @@ This course will roughly take about 60min.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Once you create an account over at one of those sites. You would have to create a <em>container</em> of some sort.
-<a href="https://www.digitalocean.com/">Digital ocean</a> refers to this a droplet, as will I from now.
-A droplet is basically a server, when creating a droplet, choose to your liking. Some options to look out for is where the server will be hosted. Close to you means lower ping. You can decide which os it will be on that droplet. For the remainder of this course I will be demonstrating the workflow on Ubuntu 18.04. For this particular example I chose a droplet in the 5$/month price range, which has a 1gb of memory, which is enough for a single web application and a hybrid of multiple web apps, be those static pages and or served web apps like a React.js application.</p>
+<a href="https://www.digitalocean.com/">Digital ocean</a> refers to this as a droplet, as will I from now.
+A droplet is basically a server, when creating a droplet, choose to your liking. One option to look out for is where the server will be hosted. Close to you means lower ping. You can decide which os it will be on that droplet. For the remainder of this course, I will be demonstrating the workflow on Ubuntu 18.04. For this particular example, I chose a droplet in the 5$/month price range, which has a 1GB of memory, which is enough for a single web application and a hybrid of multiple web apps, be those static pages and or served web apps like a React.js application.</p>
 </div>
 </div>
 </div>
@@ -112,7 +112,7 @@ A droplet is basically a server, when creating a droplet, choose to your liking.
 <h2 id="_logging_onto_your_new_server">Logging onto your new server</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You now want to set it up. For that we need a connection to the server first. On Mac OS and Linux, this is simply done via the command line. Regardless of how you setup the authentication, either via password or ssh-key - you do the following.</p>
+<p>You now want to set it up. For that, we need a connection to the server first. On Mac OS and Linux, this is simply done via the command line. Regardless of how you set up the authentication, either via password or ssh-key - you do the following.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -120,10 +120,10 @@ A droplet is basically a server, when creating a droplet, choose to your liking.
 </div>
 </div>
 <div class="paragraph">
-<p>For windows, this may result in having to use a thirdparty application like <a href="https://www.putty.org/">putty</a>.</p>
+<p>For windows, this may result in having to use a third-party application like <a href="https://www.putty.org/">putty</a>.</p>
 </div>
 <div class="paragraph">
-<p>In case you are wondering why we use <code>root@</code> infront of the ip adress, this simply specifies the username on that machine. You can think of a server like a normal desktop pc, without the desktop, without the monitor to it, you only have access to the console.</p>
+<p>In case you are wondering why we use <code>root@</code> in front of the ip address, this simply specifies the username on that machine. You can think of a server like a normal desktop pc, without the desktop, without the monitor to it, you only have access to the console.</p>
 </div>
 </div>
 </div>
@@ -131,7 +131,7 @@ A droplet is basically a server, when creating a droplet, choose to your liking.
 <h2 id="_creating_a_user">Creating a user</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We <em>add</em> a user, give it sudo priveleges by <em>adding Group</em> sudo to the username, then <em>switch user</em> to that newly created one.</p>
+<p>We <em>add</em> a user, give it sudo privileges by <em>adding Group</em> sudo to the username, then <em>switch user</em> to that newly created one.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -190,7 +190,7 @@ sudo ufw enable</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>At this point you want to try reconnecting to your server via ssh-key or password.</p>
+<p>At this point, you want to try reconnecting to your server via ssh-key or password.</p>
 </div>
 </div>
 </div>
@@ -216,16 +216,16 @@ You can also use nano. To do that simply replace <code>vi</code> with <code>nano
 <div class="paragraph">
 <p>In that file find the line that says
 <code>PermitRootLogin yes</code> and change that to <code>PermitRootLogin no</code>.
-This will remove the ability to login as root@your_ip_adress, which is what we want. Since you have to specify a username, it disallows bruteforce attacks to root@your_ip_adress.</p>
+This will remove the ability to login as root@your_ip_adress, which is what we want. Since you have to specify a username, it disallows brute-force attacks to root@your_ip_adress.</p>
 </div>
 <div class="paragraph">
 <p><strong>ONLY DO THE FOLLOWING IF YOU HAVE PREVIOUSLY CONNECTED VIA SSH-KEY AND YOU KNOW WHAT YOU&#8217;RE DOING</strong>.<br>
 I would recommend also changing <code>PasswordAuthentication yes</code> to a <code>no</code>.<br>
-If you plan on doing this, be sure to also copy your previous ssh-key from root to your own user profile.<br>
+If you plan on doing this, be sure to also copy your previous ssh-key from root to your user profile.<br>
 Your local ssh-key would need to be located under <code>/home/&lt;yourUserName&gt;/.ssh/id_rsa.pub</code>.<br>
 Most times, you do not have a local .ssh folder in your home directory.
 Be sure to create that via <code>mkdir /home/&lt;yourUserName&gt;/.ssh</code>.<br>
-This would disallow bruteforce attacks to yourusername@your_ip_adress too, since it only accepts ssh-keys.</p>
+This would disallow brute-force attacks to yourusername@your_ip_adress too since it only accepts ssh-keys.</p>
 </div>
 <div class="paragraph">
 <p>After saving the file, be sure to restart the sshd service via</p>
@@ -236,9 +236,9 @@ This would disallow bruteforce attacks to yourusername@your_ip_adress too, since
 </div>
 </div>
 <div class="paragraph">
-<p>and try reconnecting afterwards, to be safe.
-If you cannot connect afterwards be sure to specify the username you wish to connect to beforehand, like so<br>
-<code>ssh yourUserName@your_ip_adress:22</code>. The port is not necessary to be added via cli, as that is the default port for ssh connections. When using third party application such as <code>putty</code> for windows to connect to the remote server, it requires a port, which is 22 by default too.</p>
+<p>and try reconnecting afterward, to be safe.
+If you cannot connect be sure to specify the username you wish to connect to beforehand, like so<br>
+<code>ssh yourUserName@your_ip_adress:22</code>. The port is not necessary to be added via cli, as that is the default port for ssh connections. When using third-party applications such as <code>putty</code> for windows to connect to the remote server, it requires a port, which is 22 by default too.</p>
 </div>
 <div class="paragraph">
 <p>By now, you should have a secure server setup.</p>
@@ -259,17 +259,17 @@ mkdir prod</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_a_sample_api_optional">Running a sample api - optional</h2>
+<h2 id="_running_a_sample_api_optional">Running a sample API - optional</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Feel free to skip to the <a href="#nginx-setup">nginx setup</a>, as this step is <strong>purely demonstrational</strong> and may help in understanding the following nginx setup.<br>
+<p>Feel free to skip to the <a href="#nginx-setup">nginx setup</a>, as this step is <strong>purely educational</strong> and may help in understanding the following nginx setup.<br>
 Now go into the newly create sample directory and install express.js and open up a new index.js file.<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">cd dev/sample
 npm init -y
-npm i express --save;
+npm I express --save;
 vi index.js</code></pre>
 </div>
 </div>
@@ -318,13 +318,13 @@ app.listen(port, () =&gt; {
 </blockquote>
 </div>
 <div class="paragraph">
-<p>You may be wondering what exactly is a <a href="https://www.nginx.com/resources/glossary/reverse-proxy-server/">reverse proxy</a>. To put it simply, it&#8217;s redirects traffic to where you want it to go. This way you can handle alot of different applications on just one server - fairly easy too.
+<p>You may be wondering what exactly is a <a href="https://www.nginx.com/resources/glossary/reverse-proxy-server/">reverse proxy</a>. To put it simply, it&#8217;s redirects traffic to where you want it to go. This way you can handle a lot of different applications on just one server - fairly easy too.
 `</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">cd /etc/nginx/sites-available
-ls # you should see atleast one file called default
+ls # you should see at least one file called default
 # if you see a &lt;yourIpAdress&gt;.conf use that one in this example</code></pre>
 </div>
 </div>
@@ -342,7 +342,7 @@ sudo ln -s ../sites-available/&lt;yourDomainName&gt;.conf ./&lt;yourDomainName&g
 <p>You have just created a sim-link from the <strong>sites-available</strong> to the <strong>sites-enabled</strong> directory. The sites-enabled directory is where nginx is looking for your config files. It&#8217;s the convention to use it like this.</p>
 </div>
 <div class="paragraph">
-<p>Say we want to have a web app, that built with any front end framework (say react.js for example) which we want running on "/", we have a wiki which we will have at "/wiki" and an api at "/api".</p>
+<p>Say we want to have a web app, that built with any front-end framework (say react.js for example) which we want running on "/", we have a wiki which we will have at "/wiki" and an api at "/api".</p>
 </div>
 <div class="paragraph">
 <p><code>sudo vi default</code></p>
@@ -353,30 +353,30 @@ sudo ln -s ../sites-available/&lt;yourDomainName&gt;.conf ./&lt;yourDomainName&g
   sandbox="allow-scripts allow-same-origin">
 </iframe>
 <div class="paragraph">
-<p>There will obviously be other content in the file, which I tried to portray with the <code>&#8230;&#8203;content</code> syntax.</p>
+<p>There will be other content in the file, which I tried to portray with the <code>&#8230;&#8203;content</code> syntax.</p>
 </div>
 <div class="sect1">
 <h2 id="_reloading_nginx">Reloading nginx</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>First we test if there are any syntax issues.<br>
-For that, we do <code>sudo nginx -t</code> and if there are no errors, feel free to procede with <code>sudo systemctl restart nginx</code>.</p>
+<p>First, we test if there are any syntax issues.<br>
+For that, we do <code>sudo nginx -t</code> and if there are no errors, feel free to proceed with <code>sudo systemctl restart nginx</code>.</p>
 </div>
 </div>
 </div>
 <h1 id="_domain" class="sect0">Domain</h1>
 <div class="paragraph">
-<p>First you need a custom domain. You can get some great deals on <a href="https://namecheap.com">namecheap.com</a> and <a href="https://name.com">name.com</a>.<br>
-If you qualify for the <a href="https://education.github.com/pack">github goodie bag</a>, feel free to checkout their options. To my recollection you can get a free .me domain for a year! That&#8217;s a damn good deal. If not most domains cost roughly 5-8$ with the usual exceptions ranging from 0.23$ to 2000$ for popular choices.</p>
+<p>First, you need a custom domain. You can get some great deals on <a href="https://namecheap.com">namecheap.com</a> and <a href="https://name.com">name.com</a>.<br>
+If you qualify for the <a href="https://education.github.com/pack">github goodie bag</a>, feel free to check out their options. To my recollection, you can get a free .me domain for a year! That&#8217;s a damn good deal. If not most domains cost roughly 5-8$ with the usual exceptions ranging from 0.23$ to 2000$ for popular choices.</p>
 </div>
 <div class="paragraph">
-<p>After you get it, you would also need to add it to your server. In digital ocean, this is fairly simple. In the project overview you are greeted with a <strong>add domain</strong> button of sorts. There you would have to add a <a href="https://support.dnsimple.com/articles/a-record/">A-Record</a> with the domain pointing to the servers ip.</p>
+<p>After you get it, you would also need to add it to your server. In Digitalocean, this is fairly simple. In the project overview, you are greeted with an <strong>add domain</strong> button of sorts. There you would have to add a <a href="https://support.dnsimple.com/articles/a-record/">A-Record</a> with the domain pointing to the server&#8217;s ip.</p>
 </div>
 <div class="sect1">
 <h2 id="_name_servers">Name servers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Once that is aquired, you need to point your domains dns to your providers nameservers. Every cloud hosting provider always has a couple of nameservers associated with it. For digital ocean for example they are:</p>
+<p>Once that is acquired, you need to point your domain&#8217;s DNS to your providers' nameservers. Every cloud hosting provider always has a couple of nameservers associated with it. For digital ocean, for example, they are:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -386,7 +386,7 @@ ns3.digitalocean.com</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In this case we would need to go to the place, where we&#8217;d gotten our domain from (say namecheap.com) and go to our domain admin panel. By default the domain will point to the name servers associated with the domain provider (namecheap in this example). You simply need to change those to those of your cloud hosting provider of choice. This will take some time to fully propegate. To see if this is done you&#8217;d need to use the ping command like so.</p>
+<p>In this case, we would need to go to the place, where we&#8217;d gotten our domain from (say namecheap.com) and go to our domain admin panel. By default, the domain will point to the name servers associated with the domain provider (Namecheap in this example). You simply need to change those to those of your cloud hosting provider of choice. This will take some time to fully propagate. To see if this is done you&#8217;d need to use the ping command like so.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -439,7 +439,7 @@ PING google.com (142.250.185.142) 56(84) bytes of data.
 <p>Once that is done, it will tell you if there are any errors regarding the propagation of the nameservers or the syntax of the .conf files.</p>
 </div>
 <div class="paragraph">
-<p>After this you are prompted with a question, that has something todo with https support. Read the question, I suggest you always answer with <code>2</code>, for reasons I can&#8217;t explain nor understand, yet it&#8217;s what I do, and I&#8217;ve been told it&#8217;s fairly important.</p>
+<p>After this, you are prompted with a question, that has something to do with https support. Read the question, I suggest you always answer with <code>2</code>, for reasons I can&#8217;t explain nor understand, yet it&#8217;s what I do, and I&#8217;ve been told it&#8217;s fairly important.</p>
 </div>
 </div>
 </div>
@@ -448,12 +448,17 @@ PING google.com (142.250.185.142) 56(84) bytes of data.
 <div class="sectionbody">
 <div class="paragraph">
 <p>In case of confusion or errors, feel free to contact me on the <a href="https://discord.gg/SSRH28QxBT">discord</a> @rbrtbrnschn.
-Hope you get it going. After that it&#8217;s a real breeze to setup anything new on a new subdomain.</p>
+Hope you get it going. After that, it&#8217;s a real breeze to set up anything new on a new subdomain.</p>
 </div>
 <div class="quoteblock">
 <blockquote>
 <div class="paragraph">
 <p>Have a great day, you person on the internet.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+
+</blockquote>
 </div>
 </blockquote>
 </div>

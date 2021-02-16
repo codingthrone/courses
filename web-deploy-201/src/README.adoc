@@ -36,8 +36,8 @@ https://gist.github.com/katendeglory/88b083c6edb37d0e2b1ac942e1f93ab6,
 
 = Quick Foreword
 
-This is not a "_{notProjectName}_" quick guide. This guide will be teaching how to setup your own server, for ease of use and future deployments. If you are looking for that feel free to checkout our https://google.com/[beginner course]. To follow along with this a remote server is strongly recommended, feel free to use a local server if you fancy. We will be teaching you how to setup a new remote server, if you currently do not own one. For the sake of this course, we will be sticking to a standard Ubuntu 18.04 server. 
-If you have knowledge of other linux based distrobutions like debian, centOs, arch, etc. feel free to use those.
+This is not a "_{notProjectName}_" quick guide. This guide will be teaching how to set up your own server, for ease of use and future deployments. If you are looking for that feel free to check out our https://google.com/[beginner course]. To follow along with this a remote server is strongly recommended, feel free to use a local server if you fancy. We will be teaching you how to set up a new remote server if you currently do not own one. For the sake of this course, we will be sticking to a standard Ubuntu 18.04 server. 
+If you know other Linux-based distributions like Debian, Centos, arch, etc. feel free to use those.
 This course will roughly take about {aprox-time-for-course}.
 
 = Setup
@@ -52,23 +52,23 @@ I prefer https://www.digitalocean.com/[digital ocean] as a cloud server hoster s
 
 == Choosing hardware
 Once you create an account over at one of those sites. You would have to create a _container_ of some sort.  
-https://www.digitalocean.com/[Digital ocean] refers to this a droplet, as will I from now.
-A droplet is basically a server, when creating a droplet, choose to your liking. Some options to look out for is where the server will be hosted. Close to you means lower ping. You can decide which os it will be on that droplet. For the remainder of this course I will be demonstrating the workflow on Ubuntu 18.04. For this particular example I chose a droplet in the 5$/month price range, which has a 1gb of memory, which is enough for a single web application and a hybrid of multiple web apps, be those static pages and or served web apps like a React.js application.
+https://www.digitalocean.com/[Digital ocean] refers to this as a droplet, as will I from now.
+A droplet is basically a server, when creating a droplet, choose to your liking. One option to look out for is where the server will be hosted. Close to you means lower ping. You can decide which os it will be on that droplet. For the remainder of this course, I will be demonstrating the workflow on Ubuntu 18.04. For this particular example, I chose a droplet in the 5$/month price range, which has a 1GB of memory, which is enough for a single web application and a hybrid of multiple web apps, be those static pages and or served web apps like a React.js application.
 
 == Logging onto your new server
-You now want to set it up. For that we need a connection to the server first. On Mac OS and Linux, this is simply done via the command line. Regardless of how you setup the authentication, either via password or ssh-key - you do the following.
+You now want to set it up. For that, we need a connection to the server first. On Mac OS and Linux, this is simply done via the command line. Regardless of how you set up the authentication, either via password or ssh-key - you do the following.
 
 ```bash
 ssh root@yourIpAdressHere
 ```
 
-For windows, this may result in having to use a thirdparty application like https://www.putty.org/[putty].
+For windows, this may result in having to use a third-party application like https://www.putty.org/[putty].
 
-In case you are wondering why we use `root@` infront of the ip adress, this simply specifies the username on that machine. You can think of a server like a normal desktop pc, without the desktop, without the monitor to it, you only have access to the console.
+In case you are wondering why we use `root@` in front of the ip address, this simply specifies the username on that machine. You can think of a server like a normal desktop pc, without the desktop, without the monitor to it, you only have access to the console.
 
 == Creating a user
 
-We _add_ a user, give it sudo priveleges by _adding Group_ sudo to the username, then _switch user_ to that newly created one.
+We _add_ a user, give it sudo privileges by _adding Group_ sudo to the username, then _switch user_ to that newly created one.
 ```bash
 adduser yourUsernameOfChoice
 usermod -aG sudo yourUsernameOfChoice
@@ -104,7 +104,7 @@ sudo ufw allow "Nginx FULL"
 sudo ufw allow OpenSSH
 sudo ufw enable
 ```
-At this point you want to try reconnecting to your server via ssh-key or password.
+At this point, you want to try reconnecting to your server via ssh-key or password.
 
 == Adding increased security
 
@@ -121,23 +121,23 @@ ____
 
 In that file find the line that says
 `PermitRootLogin yes` and change that to `PermitRootLogin no`.
-This will remove the ability to login as root@your_ip_adress, which is what we want. Since you have to specify a username, it disallows bruteforce attacks to root@your_ip_adress.
+This will remove the ability to login as root@your_ip_adress, which is what we want. Since you have to specify a username, it disallows brute-force attacks to root@your_ip_adress.
 
 *ONLY DO THE FOLLOWING IF YOU HAVE PREVIOUSLY CONNECTED VIA SSH-KEY AND YOU KNOW WHAT YOU'RE DOING*. +
 I would recommend also changing `PasswordAuthentication yes` to a `no`. +
-If you plan on doing this, be sure to also copy your previous ssh-key from root to your own user profile. +
+If you plan on doing this, be sure to also copy your previous ssh-key from root to your user profile. +
 Your local ssh-key would need to be located under `/home/<yourUserName>/.ssh/id_rsa.pub`. +
 Most times, you do not have a local .ssh folder in your home directory. 
 Be sure to create that via `mkdir /home/<yourUserName>/.ssh`. +
-This would disallow bruteforce attacks to yourusername@your_ip_adress too, since it only accepts ssh-keys.
+This would disallow brute-force attacks to yourusername@your_ip_adress too since it only accepts ssh-keys.
 
 After saving the file, be sure to restart the sshd service via
 ```bash
 sudo systemctl restart sshd
 ```
-and try reconnecting afterwards, to be safe.
-If you cannot connect afterwards be sure to specify the username you wish to connect to beforehand, like so +
-`ssh yourUserName@your_ip_adress:22`. The port is not necessary to be added via cli, as that is the default port for ssh connections. When using third party application such as `putty` for windows to connect to the remote server, it requires a port, which is 22 by default too.
+and try reconnecting afterward, to be safe.
+If you cannot connect be sure to specify the username you wish to connect to beforehand, like so +
+`ssh yourUserName@your_ip_adress:22`. The port is not necessary to be added via cli, as that is the default port for ssh connections. When using third-party applications such as `putty` for windows to connect to the remote server, it requires a port, which is 22 by default too.
 
 By now, you should have a secure server setup.
 
@@ -151,14 +151,14 @@ mkdir -p dev/sample
 mkdir prod
 ```
 
-== Running a sample api - optional 
-Feel free to skip to the <<nginx-setup, nginx setup>>, as this step is *purely demonstrational* and may help in understanding the following nginx setup. +
+== Running a sample API - optional 
+Feel free to skip to the <<nginx-setup, nginx setup>>, as this step is *purely educational* and may help in understanding the following nginx setup. +
 Now go into the newly create sample directory and install express.js and open up a new index.js file. +
 
 ```bash
 cd dev/sample
 npm init -y
-npm i express --save;
+npm I express --save;
 vi index.js
 ```
 
@@ -192,11 +192,11 @@ ____
 
 
 
-You may be wondering what exactly is a https://www.nginx.com/resources/glossary/reverse-proxy-server/[reverse proxy]. To put it simply, it's redirects traffic to where you want it to go. This way you can handle alot of different applications on just one server - fairly easy too.
+You may be wondering what exactly is a https://www.nginx.com/resources/glossary/reverse-proxy-server/[reverse proxy]. To put it simply, it's redirects traffic to where you want it to go. This way you can handle a lot of different applications on just one server - fairly easy too.
 `
 ```bash
 cd /etc/nginx/sites-available
-ls # you should see atleast one file called default
+ls # you should see at least one file called default
 # if you see a <yourIpAdress>.conf use that one in this example
 ```
 You usually want to copy the default file to a new file of this namingScheme: `<yourDomain>.conf`. So if you already have a domain, be sure to do the following:
@@ -208,7 +208,7 @@ sudo ln -s ../sites-available/<yourDomainName>.conf ./<yourDomainName>.conf
 ```
 You have just created a sim-link from the *sites-available* to the *sites-enabled* directory. The sites-enabled directory is where nginx is looking for your config files. It's the convention to use it like this.
 
-Say we want to have a web app, that built with any front end framework (say react.js for example) which we want running on "/", we have a wiki which we will have at "/wiki" and an api at "/api".
+Say we want to have a web app, that built with any front-end framework (say react.js for example) which we want running on "/", we have a wiki which we will have at "/wiki" and an api at "/api".
 
 `sudo vi default`
 [pass]
@@ -218,23 +218,23 @@ Say we want to have a web app, that built with any front end framework (say reac
   sandbox="allow-scripts allow-same-origin">
 </iframe>
 
-There will obviously be other content in the file, which I tried to portray with the `...content` syntax.
+There will be other content in the file, which I tried to portray with the `...content` syntax.
 
 
 == Reloading nginx
-First we test if there are any syntax issues. +
-For that, we do `sudo nginx -t` and if there are no errors, feel free to procede with `sudo systemctl restart nginx`.
+First, we test if there are any syntax issues. +
+For that, we do `sudo nginx -t` and if there are no errors, feel free to proceed with `sudo systemctl restart nginx`.
 
 = Domain
 
-First you need a custom domain. You can get some great deals on https://namecheap.com[namecheap.com] and https://name.com[name.com]. +
-If you qualify for the https://education.github.com/pack[github goodie bag], feel free to checkout their options. To my recollection you can get a free .me domain for a year! That's a damn good deal. If not most domains cost roughly 5-8$ with the usual exceptions ranging from 0.23$ to 2000$ for popular choices.
+First, you need a custom domain. You can get some great deals on https://namecheap.com[namecheap.com] and https://name.com[name.com]. +
+If you qualify for the https://education.github.com/pack[github goodie bag], feel free to check out their options. To my recollection, you can get a free .me domain for a year! That's a damn good deal. If not most domains cost roughly 5-8$ with the usual exceptions ranging from 0.23$ to 2000$ for popular choices.
 
-After you get it, you would also need to add it to your server. In digital ocean, this is fairly simple. In the project overview you are greeted with a *add domain* button of sorts. There you would have to add a https://support.dnsimple.com/articles/a-record/[A-Record] with the domain pointing to the servers ip.
+After you get it, you would also need to add it to your server. In Digitalocean, this is fairly simple. In the project overview, you are greeted with an *add domain* button of sorts. There you would have to add a https://support.dnsimple.com/articles/a-record/[A-Record] with the domain pointing to the server's ip.
 
 == Name servers
 
-Once that is aquired, you need to point your domains dns to your providers nameservers. Every cloud hosting provider always has a couple of nameservers associated with it. For digital ocean for example they are:
+Once that is acquired, you need to point your domain's DNS to your providers' nameservers. Every cloud hosting provider always has a couple of nameservers associated with it. For digital ocean, for example, they are:
 
 ```
 ns1.digitalocean.com
@@ -242,7 +242,7 @@ ns2.digitalocean.com
 ns3.digitalocean.com
 ```
 
-In this case we would need to go to the place, where we'd gotten our domain from (say namecheap.com) and go to our domain admin panel. By default the domain will point to the name servers associated with the domain provider (namecheap in this example). You simply need to change those to those of your cloud hosting provider of choice. This will take some time to fully propegate. To see if this is done you'd need to use the ping command like so.
+In this case, we would need to go to the place, where we'd gotten our domain from (say namecheap.com) and go to our domain admin panel. By default, the domain will point to the name servers associated with the domain provider (Namecheap in this example). You simply need to change those to those of your cloud hosting provider of choice. This will take some time to fully propagate. To see if this is done you'd need to use the ping command like so.
 
 ```
 ping yourDomain
@@ -274,13 +274,13 @@ sudo certbot --nginx -d yourDomainHere -d yourOtherDomainHereIfYourHaveAddedMore
 
 Once that is done, it will tell you if there are any errors regarding the propagation of the nameservers or the syntax of the .conf files.
 
-After this you are prompted with a question, that has something todo with https support. Read the question, I suggest you always answer with `2`, for reasons I can't explain nor understand, yet it's what I do, and I've been told it's fairly important.
+After this, you are prompted with a question, that has something to do with https support. Read the question, I suggest you always answer with `2`, for reasons I can't explain nor understand, yet it's what I do, and I've been told it's fairly important.
 
 == Last words 
 In case of confusion or errors, feel free to contact me on the https://discord.gg/SSRH28QxBT[discord] @rbrtbrnschn.
-Hope you get it going. After that it's a real breeze to setup anything new on a new subdomain. 
+Hope you get it going. After that, it's a real breeze to set up anything new on a new subdomain. 
 
 [quote]
 ____
 Have a great day, you person on the internet.
-____
+_____

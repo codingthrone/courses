@@ -1,0 +1,41 @@
+```
+server {
+    ... content
+    # Frontend Application With react.js
+    location / {
+        # since this is a react.js application we need to serve the build files as a server
+        #, so we need to listen to a specific port
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:8080;
+    }
+    
+    # Documentation - Wiki
+    location /wiki {
+        # since you usually build a wiki, this will be most likely static content.
+        # that's why we alias the root to the given directory.
+        alias /var/www/reactApp/wiki; 
+    }
+    
+    # Backend Api
+    location /api {
+        # this will also be a server
+        # this one will be listening to port 3000
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:3000;
+        
+    }
+    ... content
+}
+```
+
+<iframe
+  src="https://carbon.now.sh/embed?bg=rgba%2851%2C155%2C216%2C1%29&t=panda-syntax&wt=none&l=nginx&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=server%2520%257B%250A%2520%2520%2520%2520...%2520content%250A%2520%2520%2520%2520%2523%2520Frontend%2520Application%2520With%2520react.js%250A%2520%2520%2520%2520location%2520%252F%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520since%2520this%2520is%2520a%2520react.js%2520application%2520we%2520need%2520to%2520serve%2520the%2520build%2520files%2520as%2520a%2520server%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%252C%2520so%2520we%2520need%2520to%2520listen%2520to%2520a%2520specific%2520port%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Forwarded-For%2520%2524proxy_add_x_forwarded_for%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Forwarded-Proto%2520%2524scheme%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Real-IP%2520%2524remote_addr%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520Host%2520%2524http_host%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_pass%2520http%253A%252F%252F127.0.0.1%253A8080%253B%250A%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%250A%2520%2520%2520%2520%2523%2520Documentation%2520-%2520Wiki%250A%2520%2520%2520%2520location%2520%252Fwiki%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520since%2520you%2520usually%2520build%2520a%2520wiki%252C%2520this%2520will%2520be%2520most%2520likely%2520static%2520content.%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520that%27s%2520why%2520we%2520alias%2520the%2520root%2520to%2520the%2520given%2520directory.%250A%2520%2520%2520%2520%2520%2520%2520%2520alias%2520%252Fvar%252Fwww%252FreactApp%252Fwiki%253B%2520%250A%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%250A%2520%2520%2520%2520%2523%2520Backend%2520Api%250A%2520%2520%2520%2520location%2520%252Fapi%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520this%2520will%2520also%2520be%2520a%2520server%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520this%2520one%2520will%2520be%2520listening%2520to%2520port%25203000%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Forwarded-For%2520%2524proxy_add_x_forwarded_for%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Forwarded-Proto%2520%2524scheme%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Real-IP%2520%2524remote_addr%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520Host%2520%2524http_host%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_pass%2520http%253A%252F%252F127.0.0.1%253A3000%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%250A%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520...%2520content%250A%257D"
+  style="width: 1024px; height: 900ox; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin">
+</iframe>

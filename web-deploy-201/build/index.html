@@ -67,10 +67,10 @@
 <p><a href="#_domain">Domain</a></p>
 </li>
 <li>
-<p>tips and tricks</p>
+<p><a href="#_certbot">Certbot</a></p>
 </li>
 <li>
-<p>last words</p>
+<p><a href="#_last_words">Last words</a></p>
 </li>
 </ol>
 </div>
@@ -83,10 +83,12 @@ If you have knowledge of other linux based distrobutions like debian, centOs, ar
 This course will roughly take about 60min.</p>
 </div>
 <h1 id="_setup" class="sect0">Setup</h1>
-<div class="literalblock">
-<div class="content">
-<pre>The way of the cloud.</pre>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>The way of the cloud.</p>
 </div>
+</blockquote>
 </div>
 <div class="sect1">
 <h2 id="_choosing_a_cloud_hosting_provider">Choosing a cloud hosting provider</h2>
@@ -197,13 +199,19 @@ sudo ufw enable</code></pre>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You may use your text editor of choice, I choose vim.
-You can also use nano. To do that simply replace <code>vi</code> with <code>nano</code>.<br>
-Just in case <a href="https://itsfoss.com/how-to-exit-vim/">you get stuck in the vim editor</a>.</p>
+You can also use nano. To do that simply replace <code>vi</code> with <code>nano</code>.<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">sudo vi /etc/ssh/sshd_config</code></pre>
 </div>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Just in case <a href="https://itsfoss.com/how-to-exit-vim/">you get stuck in the vim editor</a>.</p>
+</div>
+</blockquote>
 </div>
 <div class="paragraph">
 <p>In that file find the line that says
@@ -302,8 +310,12 @@ app.listen(port, () =&gt; {
 </div>
 </div>
 <h1 id="_nginx_setup" class="sect0">Nginx Setup</h1>
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
 <p>Setting up your server as a reverse proxy</p>
+</div>
+</blockquote>
 </div>
 <div class="paragraph">
 <p>You may be wondering what exactly is a <a href="https://www.nginx.com/resources/glossary/reverse-proxy-server/">reverse proxy</a>. To put it simply, it&#8217;s redirects traffic to where you want it to go. This way you can handle alot of different applications on just one server - fairly easy too.
@@ -313,50 +325,33 @@ app.listen(port, () =&gt; {
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">cd /etc/nginx/sites-available
 ls # you should see atleast one file called default
-# if you see a &lt;yourIpAdress&gt;.conf use that one in this example
-sudo vi default</code></pre>
+# if you see a &lt;yourIpAdress&gt;.conf use that one in this example</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>You usually want to copy the default file to a new file of this namingScheme: <code>&lt;yourDomain&gt;.conf</code>. So if you already have a domain, be sure to do the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>sudo cp -a defualt &lt;yourDomainName&gt;.conf
+cd ../sites-enabled
+sudo ln -s ../sites-available/&lt;yourDomainName&gt;.conf ./&lt;yourDomainName&gt;.conf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You have just created a sim-link from the <strong>sites-available</strong> to the <strong>sites-enabled</strong> directory. The sites-enabled directory is where nginx is looking for your config files. It&#8217;s the convention to use it like this.</p>
 </div>
 <div class="paragraph">
 <p>Say we want to have a web app, that built with any front end framework (say react.js for example) which we want running on "/", we have a wiki which we will have at "/wiki" and an api at "/api".</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>server {
-    ... content
-    # Frontend Application With react.js
-    location / {
-        # since this is a react.js application we need to serve the build files as a server
-        #, so we need to listen to a specific port
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header Host $http_host;
-        proxy_pass http://127.0.0.1:8080;
-    }
-
-    # Documentation - Wiki
-    location /wiki {
-        # since you usually build a wiki, this will be most likely static content.
-        # that's why we alias the root to the given directory.
-        alias /var/www/reactApp/wiki;
-    }
-
-    # Backend Api
-    location /api {
-        # this will also be a server
-        # this one will be listening to port 3000
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header Host $http_host;
-        proxy_pass http://127.0.0.1:3000;
-
-    }
-    ... content
-}</code></pre>
+<div class="paragraph">
+<p><code>sudo vi default</code></p>
 </div>
-</div>
+<iframe
+  src="https://carbon.now.sh/embed?bg=rgba%2851%2C155%2C216%2C1%29&t=panda-syntax&wt=none&l=nginx&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=server%2520%257B%250A%2520%2520%2520%2520...%2520content%250A%2520%2520%2520%2520%2523%2520Frontend%2520Application%2520With%2520react.js%250A%2520%2520%2520%2520location%2520%252F%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520since%2520this%2520is%2520a%2520react.js%2520application%2520we%2520need%2520to%2520serve%2520the%2520build%2520files%2520as%2520a%2520server%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%252C%2520so%2520we%2520need%2520to%2520listen%2520to%2520a%2520specific%2520port%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Forwarded-For%2520%2524proxy_add_x_forwarded_for%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Forwarded-Proto%2520%2524scheme%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Real-IP%2520%2524remote_addr%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520Host%2520%2524http_host%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_pass%2520http%253A%252F%252F127.0.0.1%253A8080%253B%250A%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%250A%2520%2520%2520%2520%2523%2520Documentation%2520-%2520Wiki%250A%2520%2520%2520%2520location%2520%252Fwiki%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520since%2520you%2520usually%2520build%2520a%2520wiki%252C%2520this%2520will%2520be%2520most%2520likely%2520static%2520content.%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520that%27s%2520why%2520we%2520alias%2520the%2520root%2520to%2520the%2520given%2520directory.%250A%2520%2520%2520%2520%2520%2520%2520%2520alias%2520%252Fvar%252Fwww%252FreactApp%252Fwiki%253B%2520%250A%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%250A%2520%2520%2520%2520%2523%2520Backend%2520Api%250A%2520%2520%2520%2520location%2520%252Fapi%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520this%2520will%2520also%2520be%2520a%2520server%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520this%2520one%2520will%2520be%2520listening%2520to%2520port%25203000%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Forwarded-For%2520%2524proxy_add_x_forwarded_for%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Forwarded-Proto%2520%2524scheme%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520X-Real-IP%2520%2524remote_addr%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_set_header%2520Host%2520%2524http_host%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520proxy_pass%2520http%253A%252F%252F127.0.0.1%253A3000%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%250A%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520...%2520content%250A%257D"
+  style="width: 1024px; height: 900px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin">
+</iframe>
 <div class="paragraph">
 <p>There will obviously be other content in the file, which I tried to portray with the <code>&#8230;&#8203;content</code> syntax.</p>
 </div>
@@ -374,17 +369,93 @@ For that, we do <code>sudo nginx -t</code> and if there are no errors, feel free
 <p>First you need a custom domain. You can get some great deals on <a href="https://namecheap.com">namecheap.com</a> and <a href="https://name.com">name.com</a>.<br>
 If you qualify for the <a href="https://education.github.com/pack">github goodie bag</a>, feel free to checkout their options. To my recollection you can get a free .me domain for a year! That&#8217;s a damn good deal. If not most domains cost roughly 5-8$ with the usual exceptions ranging from 0.23$ to 2000$ for popular choices.</p>
 </div>
+<div class="paragraph">
+<p>After you get it, you would also need to add it to your server. In digital ocean, this is fairly simple. In the project overview you are greeted with a <strong>add domain</strong> button of sorts. There you would have to add a <a href="https://support.dnsimple.com/articles/a-record/">A-Record</a> with the domain pointing to the servers ip.</p>
+</div>
 <div class="sect1">
 <h2 id="_name_servers">Name servers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Once that is aquired, you need to point your domains dns to your providers nameservers.</p>
+<p>Once that is aquired, you need to point your domains dns to your providers nameservers. Every cloud hosting provider always has a couple of nameservers associated with it. For digital ocean for example they are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>ns1.digitalocean.com
+ns2.digitalocean.com
+ns3.digitalocean.com</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case we would need to go to the place, where we&#8217;d gotten our domain from (say namecheap.com) and go to our domain admin panel. By default the domain will point to the name servers associated with the domain provider (namecheap in this example). You simply need to change those to those of your cloud hosting provider of choice. This will take some time to fully propegate. To see if this is done you&#8217;d need to use the ping command like so.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>ping yourDomain</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>this is how a good response looks:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code># for google for example
+PING google.com (142.250.185.142) 56(84) bytes of data.
+64 bytes from fra16s50-in-f14.1e100.net (142.250.185.142): icmp_seq=1 ttl=119 time=16.3 ms</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If it finds your ip associated with the domain you can continue to the next step.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_setup_nginx_with_certbot">setup nginx with certbot</h2>
+<h2 id="_certbot">Certbot</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Certbot will add certificates to your domain. All you need to know for now is, those are necessary for a secure https connection. To do so, you must have done the following:</p>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>added your yourDomain.conf files to <code>/etc/nginx/sites-enabled</code> via sim-link or regular file</p>
+</li>
+<li>
+<p>tested the syntax of your config file with <code>sudo nginx -t</code></p>
+</li>
+<li>
+<p>waited for the nameservers to be fully propagated (usually takes up to a day)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If so, let&#8217;s move on.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">sudo certbot --nginx -d yourDomainHere -d yourOtherDomainHereIfYourHaveAddedMore -d evenSubDomainsGoGere -d theDStandsForDomain</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once that is done, it will tell you if there are any errors regarding the propagation of the nameservers or the syntax of the .conf files.</p>
+</div>
+<div class="paragraph">
+<p>After this you are prompted with a question, that has something todo with https support. Read the question, I suggest you always answer with <code>2</code>, for reasons I can&#8217;t explain nor understand, yet it&#8217;s what I do, and I&#8217;ve been told it&#8217;s fairly important.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_last_words">Last words</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In case of confusion or errors, feel free to contact me on the <a href="https://discord.gg/SSRH28QxBT">discord</a> @rbrtbrnschn.
+Hope you get it going. After that it&#8217;s a real breeze to setup anything new on a new subdomain.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Have a great day, you person on the internet.</p>
+</div>
+</blockquote>
+</div>
 </div>
 </div>

@@ -1,0 +1,33 @@
+{
+  "name": "web-deploy-201",
+  "version": "1.0.0",
+  "description": "Web Dev Deploy 101 for Intermediates by @rbrtbrnschn",
+  "main": "README.adoc",
+  "scripts": {
+    "test": "exit 0",
+    "build": "node ./scripts/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codingthrone/courses.git"
+  },
+  "keywords": [
+    "course",
+    "web",
+    "dev",
+    "deploy",
+    "web",
+    "deploy",
+    "web",
+    "dev"
+  ],
+  "author": "Robert Bornschein",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codingthrone/courses/issues"
+  },
+  "homepage": "https://github.com/codingthrone/courses#readme",
+  "dependencies": {
+    "asciidoctor": "^2.2.1"
+  }
+}

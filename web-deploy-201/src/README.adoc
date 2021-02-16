@@ -1,0 +1,247 @@
+= Web Deploy 201 [Intermediate]
+:description: Intermediate guide to deploying web apps
+:no_header:
+:version: 1.0.0
+:author: Robert Bornschein
+:autor:email: bornirobert@aol.de
+:git-repo: https://my-git-repo 
+:aprox-time-for-course: 60min
+:notProjectName: how to get your simple static webpage hosted somewhere for free
+:references:
+https://gist.github.com/katendeglory/88b083c6edb37d0e2b1ac942e1f93ab6, 
+:attribute-missing: drop
+
+== Table of content
+
+[upperroman]
+. <<Quick Foreword, Quick Foreword>>
+. <<Setup, Setup>>
+  * <<Choosing a cloud hosting provider, cloud hosting provider>>
+  * <<Choosing hardware, Choosing hardware>>
+  * <<Logging onto your new server,Logging onto your new server>>
+  * <<Creating a user, Creating a user>>
+  * <<Updating the app store, Updating the app store>>
+  * <<Installing dependencies, Installing dependencies>>
+  * <<Starting Nginx, Starting Nginx>>
+  * <<Setting up firewall, Setting up firewall>>
+  * <<Adding increased security, Adding increased security>>
+. <<Structure, Structure>>
+  * <<Creating some directories, Creating some directories>>
+  * <<Running a sample api - optional, optional>>
+. <<Nginx Setup, Nginx>>
+  * <<Reloading nginx, Reloading nginx>>
+. <<Domain, Domain>>
+. tips and tricks
+. last words
+
+= Quick Foreword
+
+This is not a "_{notProjectName}_" quick guide. This guide will be teaching how to setup your own server, for ease of use and future deployments. If you are looking for that feel free to checkout our https://google.com/[beginner course]. To follow along with this a remote server is strongly recommended, feel free to use a local server if you fancy. We will be teaching you how to setup a new remote server, if you currently do not own one. For the sake of this course, we will be sticking to a standard Ubuntu 18.04 server. 
+If you have knowledge of other linux based distrobutions like debian, centOs, arch, etc. feel free to use those.
+This course will roughly take about {aprox-time-for-course}.
+
+= Setup
+
+
+ The way of the cloud. 
+
+== Choosing a cloud hosting provider
+I prefer https://www.digitalocean.com/[digital ocean] as a cloud server hoster service, mainly due to the amount of free credit I was given thanks to the https://education.github.com/pack[github goodie bag] due to my college application. Other services would be https://www.linode.com/[linode] and https://aws.amazon.com/[AWS].
+
+== Choosing hardware
+Once you create an account over at one of those sites. You would have to create a _container_ of some sort.  
+https://www.digitalocean.com/[Digital ocean] refers to this a droplet, as will I from now.
+A droplet is basically a server, when creating a droplet, choose to your liking. Some options to look out for is where the server will be hosted. Close to you means lower ping. You can decide which os it will be on that droplet. For the remainder of this course I will be demonstrating the workflow on Ubuntu 18.04. For this particular example I chose a droplet in the 5$/month price range, which has a 1gb of memory, which is enough for a single web application and a hybrid of multiple web apps, be those static pages and or served web apps like a React.js application.
+
+== Logging onto your new server
+You now want to set it up. For that we need a connection to the server first. On Mac OS and Linux, this is simply done via the command line. Regardless of how you setup the authentication, either via password or ssh-key - you do the following.
+
+```bash
+ssh root@yourIpAdressHere
+```
+
+For windows, this may result in having to use a thirdparty application like https://www.putty.org/[putty].
+
+In case you are wondering why we use `root@` infront of the ip adress, this simply specifies the username on that machine. You can think of a server like a normal desktop pc, without the desktop, without the monitor to it, you only have access to the console.
+
+== Creating a user
+
+We _add_ a user, give it sudo priveleges by _adding Group_ sudo to the username, then _switch user_ to that newly created one.
+```bash
+adduser yourUsernameOfChoice
+usermod -aG sudo yourUsernameOfChoice
+su - yourUsernameOfChoice
+```
+
+== Updating the app store
+```bash
+sudo apt-get update
+```
+
+== Installing dependencies
+```bash
+sudo apt-get install git nginx ufw vim nano screen nodejs
+
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-nginx
+```
+
+== Starting Nginx
+```bash
+sudo systemctl enable nginx # in case it's
+sudo systemctl start nginx # not already running
+```
+
+== Setting up firewall
+
+```bash
+sudo ufw allow "Nginx HTTP"
+sudo ufw allow "Nginx HTTPS"
+sudo ufw allow "Nginx FULL"
+sudo ufw allow OpenSSH
+sudo ufw enable
+```
+At this point you want to try reconnecting to your server via ssh-key or password.
+
+== Adding increased security
+
+You may use your text editor of choice, I choose vim.
+You can also use nano. To do that simply replace `vi` with `nano`. +
+Just in case https://itsfoss.com/how-to-exit-vim/[you get stuck in the vim editor].
+```bash
+sudo vi /etc/ssh/sshd_config
+```
+
+In that file find the line that says
+`PermitRootLogin yes` and change that to `PermitRootLogin no`.
+This will remove the ability to login as root@your_ip_adress, which is what we want. Since you have to specify a username, it disallows bruteforce attacks to root@your_ip_adress.
+
+*ONLY DO THE FOLLOWING IF YOU HAVE PREVIOUSLY CONNECTED VIA SSH-KEY AND YOU KNOW WHAT YOU'RE DOING*. +
+I would recommend also changing `PasswordAuthentication yes` to a `no`. +
+If you plan on doing this, be sure to also copy your previous ssh-key from root to your own user profile. +
+Your local ssh-key would need to be located under `/home/<yourUserName>/.ssh/id_rsa.pub`. +
+Most times, you do not have a local .ssh folder in your home directory. 
+Be sure to create that via `mkdir /home/<yourUserName>/.ssh`. +
+This would disallow bruteforce attacks to yourusername@your_ip_adress too, since it only accepts ssh-keys.
+
+After saving the file, be sure to restart the sshd service via
+```bash
+sudo systemctl restart sshd
+```
+and try reconnecting afterwards, to be safe.
+If you cannot connect afterwards be sure to specify the username you wish to connect to beforehand, like so +
+`ssh yourUserName@your_ip_adress:22`. The port is not necessary to be added via cli, as that is the default port for ssh connections. When using third party application such as `putty` for windows to connect to the remote server, it requires a port, which is 22 by default too.
+
+By now, you should have a secure server setup.
+
+
+= Structure
+
+== Creating some directories
+```bash
+cd
+mkdir -p dev/sample
+mkdir prod
+```
+
+== Running a sample api - optional 
+Feel free to skip to the <<nginx-setup, nginx setup>>, as this step is *purely demonstrational* and may help in understanding the following nginx setup. +
+Now go into the newly create sample directory and install express.js and open up a new index.js file. +
+
+```bash
+cd dev/sample
+npm init -y
+npm i express --save;
+vi index.js
+```
+
+== index.js 
+Be sure to write this to the file and save.
+```js
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
+```
+
+This will run the file you just saved (_index.js_) on a new https://linuxize.com/post/how-to-use-linux-screen/[screen]. 
+```bash
+screen -d -m node .
+```
+If you want to know how to close that screen be sure to look at https://linuxize.com/post/how-to-use-linux-screen/[this reference.]
+
+= Nginx Setup
+Setting up your server as a reverse proxy
+
+You may be wondering what exactly is a https://www.nginx.com/resources/glossary/reverse-proxy-server/[reverse proxy]. To put it simply, it's redirects traffic to where you want it to go. This way you can handle alot of different applications on just one server - fairly easy too.
+`
+```bash
+cd /etc/nginx/sites-available
+ls # you should see atleast one file called default
+# if you see a <yourIpAdress>.conf use that one in this example
+sudo vi default
+```
+
+Say we want to have a web app, that built with any front end framework (say react.js for example) which we want running on "/", we have a wiki which we will have at "/wiki" and an api at "/api".
+
+```
+server {
+    ... content
+    # Frontend Application With react.js
+    location / {
+        # since this is a react.js application we need to serve the build files as a server
+        #, so we need to listen to a specific port
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:8080;
+    }
+    
+    # Documentation - Wiki
+    location /wiki {
+        # since you usually build a wiki, this will be most likely static content.
+        # that's why we alias the root to the given directory.
+        alias /var/www/reactApp/wiki; 
+    }
+    
+    # Backend Api
+    location /api {
+        # this will also be a server
+        # this one will be listening to port 3000
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:3000;
+        
+    }
+    ... content
+}
+```
+
+There will obviously be other content in the file, which I tried to portray with the `...content` syntax.
+
+
+== Reloading nginx
+First we test if there are any syntax issues. +
+For that, we do `sudo nginx -t` and if there are no errors, feel free to procede with `sudo systemctl restart nginx`.
+
+= Domain
+
+First you need a custom domain. You can get some great deals on https://namecheap.com[namecheap.com] and https://name.com[name.com]. +
+If you qualify for the https://education.github.com/pack[github goodie bag], feel free to checkout their options. To my recollection you can get a free .me domain for a year! That's a damn good deal. If not most domains cost roughly 5-8$ with the usual exceptions ranging from 0.23$ to 2000$ for popular choices.
+
+== Name servers
+
+Once that is aquired, you need to point your domains dns to your providers nameservers.
+
+== setup nginx with certbot

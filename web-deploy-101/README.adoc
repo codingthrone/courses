@@ -7,6 +7,8 @@
 :git-repo: https://my-git-repo 
 :aprox-time-for-course: 60min
 :notProjectName: how to get your simple static webpage hosted somewhere for free
+:references:
+https://gist.github.com/katendeglory/88b083c6edb37d0e2b1ac942e1f93ab6, 
 
 
 ### Deploy for the web [intermediate]
@@ -69,6 +71,67 @@ su - yourUsernameOfChoice
 sudo apt-get update
 ```
 
+==== Installing dependencies
+```bash
+sudo apt-get install git nginx ufw vim nano screen
+
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-nginx
+```
+
+==== Starting Nginx
+```bash
+sudo systemctl enable nginx # in case it's
+sudo systemctl start nginx # not already running
+```
+
+==== Setting up firewall
+
+```bash
+sudo ufw allow "Nginx HTTP"
+sudo ufw allow "Nginx HTTPS"
+sudo ufw allow "Nginx FULL"
+sudo ufw allow OpenSSH
+sudo ufw enable
+```
+At this point you want to try reconnecting to your server via ssh-key or password.
+
+==== Adding increase security
+
+You may use your text editor of choice, I choose vim.
+You can also use nano. To do that simply replace `vi` with `nano`.
+```bash
+sudo vi /etc/ssh/sshd_config
+```
+In that file find the line that says
+`PermitRootLogin yes` and change that to `PermitRootLogin no`.
+This will remove the ability to login as root@your_ip_adress, which is what we want. Since you have to specify a username, it disallows bruteforce attacks to root@your_ip_adress.
+I would recommend also changing `PasswordAuthentication yes` to a `no`. +
+*ONLY DO THIS IF YOU HAVE PREVIOUSLY CONNECTED VIA SSH-KEY AND YOU KNOW WHAT YOU'RE DOING*. +
+If you plan on doing this, be sure to also copy your previous ssh-key from root to your own user profile. +
+Your local ssh-key would need to be located under `/home/<yourUserName>/.ssh/id_rsa.pub`. +
+Most times, you do not have a local .ssh folder in your home directory. 
+Be sure to create that via `mkdir /home/<yourUserName>/.ssh`. +
+This would disallow bruteforce attacks to yourusername@your_ip_adress too, since it only accepts ssh-keys.
+
+After saving the file, be sure to restart the sshd service via
+```bash
+sudo systemctl restart sshd
+```
+and try reconnecting afterwards, to be safe.
+If you cannot connect afterwards be sure to specify the username you wish to connect to beforehand, like so +
+`ssh yourUserName@your_ip_adress:22`. The port is not necessary to be added via cli, as that is the default port for ssh connections. When using third party application such as `putty` for windows to connect to the remote server, it requires a port, which is 22 by default too.
+
+> By now, you should have a secure server setup.
 
 [#structure]
 === Structure
+
+Let's create the structure of your user's home directory.
+```bash
+cd
+mkdir dev
+mkdir prod
+```
+

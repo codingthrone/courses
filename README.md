@@ -7,7 +7,7 @@ create a new branch named after your github username and create a folder for eac
 
 Incase of confusion, copy structure of branch **rbrtbrnschn**
 
-Finished & published courses:
+## Finished & published courses:
 
 | Author 	| Name 	| State (%) 	| Github 	| Blog 	|
 |-	|-	|-	|-	|-	|

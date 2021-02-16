@@ -228,3 +228,11 @@ There will obviously be other content in the file, which I tried to portray with
 ==== Reloading nginx
 First we test if there are any syntax issues. +
 For that, we do `sudo nginx -t` and if there are no errors, feel free to procede with `sudo systemctl restart nginx`.
+
+=== Setting up a domain
+First you need a custom domain. You can get some great deals on https://namecheap.com[namecheap.com] and https://name.com[name.com]. +
+If you qualify for the https://education.github.com/pack[github goodie bag], feel free to checkout their options. To my recollection you can get a free .me domain for a year! That's a damn good deal. If not most domains cost roughly 5-8$ with the usual exceptions ranging from 0.23$ to 2000$ for popular choices.
+
+=== name servers
+
+=== setup nginx with certbot

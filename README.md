@@ -53,3 +53,19 @@ Paste your client id on the bottom of the page and click on the link to invite y
 
 ## Getting started
 Now that we are all set lets set up a basic command.
+
+> Lets first start by setting up some ```const``` variables that we will be needing.
+```
+const Discord = require('discord.js');
+//makes sure we are using discord.js
+
+const client = new Discord.Client();
+//makes a new discord client
+
+const prefix = '`';
+//the prefix for your bot that will be used before each command
+
+const fs = require('fs');
+//command handler
+```
+After doing so go ahead and make a ```commands``` folder in your bot folder.

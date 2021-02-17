@@ -12,7 +12,7 @@ Incase of confusion, copy structure of branch **rbrtbrnschn**
 | Author 	| Name 	| State (%) 	| Github 	| Blog 	|
 |-	|-	|-	|-	|-	|
 | rbrtbrnschn 	| web-deploy-201 	| 100 	|  [URL](https://github.com/codingthrone/courses/tree/rbrtbrnschn/web-deploy-201/src) 	| [URL](http://64.225.103.55/deployment/web-deployment-201/) 	|
-|  	|  	|  	|  	|  	|
+| Minazak1 | How to make a discord bot |  0	|  	|  	|
 |  	|  	|  	|  	|  	|
 |  	|  	|  	|  	|  	|
 |  	|  	|  	|  	|  	|

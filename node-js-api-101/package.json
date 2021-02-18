@@ -1,0 +1,31 @@
+{
+  "name": "js-api-101",
+  "version": "1.0.0",
+  "description": "How to build an api with node js. Beginners guide to backend development.",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codingthrone/courses.git"
+  },
+  "keywords": [
+    "beginner",
+    "node-js",
+    "js",
+    "api",
+    "backend",
+    "development",
+    "node",
+    "how-to",
+    "codingthrone-course",
+    "codingthrone"
+  ],
+  "author": "Robert Bornschein",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codingthrone/courses/issues"
+  },
+  "homepage": "https://github.com/codingthrone/courses#readme"
+}

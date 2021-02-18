@@ -48,6 +48,19 @@
 <p><a href="#_creating_some_directories">Creating some directories</a></p>
 </li>
 <li>
+<p><a href="#_process_managers">Process managers</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_screen">Screen</a></p>
+</li>
+<li>
+<p><a href="#_pm2">PM2</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p><a href="#Running a sample api - optional">optional</a></p>
 </li>
 </ul>
@@ -296,6 +309,18 @@ app.listen(port, () =&gt; {
 })</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_process_managers">Process managers</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_screen">Screen</h3>
+<div class="paragraph">
+<p>A <a href="https://linuxize.com/post/how-to-use-linux-screen/">screen</a> is simply a new
+tab on the same machine. This will thereby also run when your connection to the
+server is closed.</p>
+</div>
 <div class="paragraph">
 <p>This will run the file you just saved (<em>index.js</em>) on a new <a href="https://linuxize.com/post/how-to-use-linux-screen/">screen</a>.</p>
 </div>
@@ -306,6 +331,30 @@ app.listen(port, () =&gt; {
 </div>
 <div class="paragraph">
 <p>If you want to know how to close that screen be sure to look at <a href="https://linuxize.com/post/how-to-use-linux-screen/">this reference.</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pm2">PM2</h3>
+<div class="paragraph">
+<p><a href="https://pm2.keymetrics.io">PM2</a> is an actual process manager. It will
+essentially do the same thing as a <strong>screen</strong>, but better, a lot better.</p>
+</div>
+<div class="paragraph">
+<p>This will run it via pm2.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">pm2 start index.js --name SampleApi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To stop the process you can do <code>pm2 stop &lt;NameOrID&gt;</code>. PM2 will not be installed
+on your system by default. Installing it requires npm, which is the
+<a href="https://www.npmjs.com/">node-package-manager</a>, which is already installed if you
+followed the instructions above (<a href="#_installing_dependencies">installing
+dependencies</a>). To install it do
+<code>sudo npm i -g pm2</code>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -454,11 +503,6 @@ Hope you get it going. After that, it&#8217;s a real breeze to set up anything n
 <blockquote>
 <div class="paragraph">
 <p>Have a great day, you person on the internet.</p>
-</div>
-<div class="quoteblock">
-<blockquote>
-
-</blockquote>
 </div>
 </blockquote>
 </div>

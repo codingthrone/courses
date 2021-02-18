@@ -27,6 +27,9 @@ https://gist.github.com/katendeglory/88b083c6edb37d0e2b1ac942e1f93ab6,
   * <<Adding increased security, Adding increased security>>
 . <<Structure, Structure>>
   * <<Creating some directories, Creating some directories>>
+  * <<Process managers>>
+    - <<Screen>>
+    - <<PM2>>
   * <<Running a sample api - optional, optional>>
 . <<Nginx Setup, Nginx>>
   * <<Reloading nginx, Reloading nginx>>
@@ -178,19 +181,41 @@ app.listen(port, () => {
 })
 ```
 
+== Process managers
+
+=== Screen
+
+A https://linuxize.com/post/how-to-use-linux-screen/[screen] is simply a new
+tab on the same machine. This will thereby also run when your connection to the
+server is closed.
+
 This will run the file you just saved (_index.js_) on a new https://linuxize.com/post/how-to-use-linux-screen/[screen]. 
 ```bash
 screen -d -m node .
 ```
 If you want to know how to close that screen be sure to look at https://linuxize.com/post/how-to-use-linux-screen/[this reference.]
 
+=== PM2
+
+https://pm2.keymetrics.io[PM2] is an actual process manager. It will
+essentially do the same thing as a *screen*, but better, a lot better.
+
+This will run it via pm2.
+```bash
+pm2 start index.js --name SampleApi
+```
+To stop the process you can do `pm2 stop <NameOrID>`. PM2 will not be installed
+on your system by default. Installing it requires npm, which is the
+https://www.npmjs.com/[node-package-manager], which is already installed if you
+followed the instructions above (<<Installing dependencies, installing
+dependencies>>). To install it do
+`sudo npm i -g pm2`.
+
 = Nginx Setup
 [quote]
 ____
 Setting up your server as a reverse proxy 
 ____
-
-
 
 You may be wondering what exactly is a https://www.nginx.com/resources/glossary/reverse-proxy-server/[reverse proxy]. To put it simply, it's redirects traffic to where you want it to go. This way you can handle a lot of different applications on just one server - fairly easy too.
 `
@@ -283,4 +308,4 @@ Hope you get it going. After that, it's a real breeze to set up anything new on 
 [quote]
 ____
 Have a great day, you person on the internet.
-_____
+____

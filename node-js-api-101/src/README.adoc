@@ -1,0 +1,115 @@
+= Node-Js Api 101
+:course-name: Node-js Api 101
+:author: Robert Bornschein
+
+== Table of contents
+
+[upperroman]
+. <<Setup>>
+    ... <<Installing Node-Js>>
+    ... <<Creating a project>>
+    ... <<Npm scripts>>
+. <<Whats an api, What's an api>>
+    ... <<Simply put>>
+    ... <<Good to know>>
+. <<Let's get coding>>
+    ... <<Hello world>>
+    ... <<Get & Post>>
+    ... <<Put-Patch-Delete & Options>>
+    ... <<Parameters>>
+    ... <<Query>>
+    ... <<Cookies>>
+    ... <<Databases>>
+    ... <<Node-Fetch>>
+
+= Setup
+
+== Installing Node-Js
+
+Since this is a `Node-Js` api which we are building, we need it installed.
+To install it, please install https://github.com/nvm-sh/nvm[nvm]. +
+*Nvm* is the node-version-manager, allows you to easily have different node versions installed and work with those seamlessly.
+
+To verify the installation of node, you can run the following commands in the command-line.
+
+```bash
+node -v # v12.20.2
+npm -v # 6.14.11
+```
+
+== Creating a project
+
+Now that node is properly installed, we can move on to the fun part - setting up the project!
+I will be going up this with the help of the command-line, feel free to manually click away!
+
+[quote]
+____
+First things first.
+____
+```bash
+# Creating a new directory
+
+mkdir node-js-api
+cd node-js-api
+
+# Creaitng an npm project, and installing deps
+npm init -y
+npm i --save express \
+  cors \
+  cookie-parser \
+  body-parser \
+  node-fetch \
+  dotenv \ 
+  nodemon 
+# Creating and writing to index.js
+vi index.js
+```
+
+=== Index.js
+
+```js
+const express = require("express");
+require("dotenv").config({path:__dirname});
+const app = express();
+const port = process.env.PORT || 3000;
+const callback = (port) => console.log(`Running on port: ${port}`);
+
+// This runs our server on port: port and takes in the callback callback
+app.listen(port, callback(port));
+```
+
+= Npm scripts
+
+== package.json 
+```json
+"scripts": {
+    "test": "test script here",
+    "dev": "nodemon"
+}
+```
+
+Having added in that *dev* script, this now allows us to run *nodemon*. +
+Nodemon restarts the server any time it detects a changed file. Meaning any time you save while editing, the server restarts. This takes out a lot of hassle from the workflow.
+
+To start working it, run `npm run dev`.
+
+= Whats an api
+
+== Simply put
+An api is simply an endpoint invisible to the day to day user, which usually communicates with your front end application (anything you can see on your screen).
+For example, when you log in to your google account - and I am assuming you have one, because it's 2021 - when you enter your password and hit that login button. The frontend (so the login page, that you see), send that password to an API (a remote server) which authenticates it and sends back a response.
+Now in the terms of a _google login_, an api would most likely send back a response code of `200`.
+That means everything is okay - password is valid.
+If it were anything else, the front application (your google login page), would say okay, that's apparently the wrong password - here try again.
+
+== How does it do that?
+
+An API always has a setup of endpoints. To understand an endpoint think of it like the url of a website you visit.
+// example / and /user and so on
+
+== Good to know
+// I dont even know
+
+= Let's get coding
+
+== Hello world

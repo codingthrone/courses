@@ -1,5 +1,18 @@
 # CodingThrone Courses
 
+Known languages:
+- javascript
+- typescript
+- java
+- python
+- ruby
+- lua
+- bash
+Known frameworks:
+- express.js
+- react.js
+
+
 ## Courses Overview:
 
 | Name 	| State (%) 	| URL Github 	| URL Blog 	|

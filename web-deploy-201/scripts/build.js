@@ -1,6 +1,5 @@
 const asciidoctor = require('asciidoctor')()
 const fs = require("fs");
-const { argv } = require('process');
 const content = fs.readFileSync("./src/README.adoc","ascii");
 const html = asciidoctor.convert(content) // (2)
 

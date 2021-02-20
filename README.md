@@ -13,7 +13,7 @@ Incase of confusion, copy structure of branch **rbrtbrnschn**
 |-	|-	|-	|-	|-	|
 | rbrtbrnschn 	| web-deploy-201 	| 100 	|  [URL](https://github.com/codingthrone/courses/tree/rbrtbrnschn/web-deploy-201/src) 	| [URL](http://64.225.103.55/deployment/web-deployment-201/) 	|
 | Minazak1 | How to make a discord bot |  5	|  	|  	|
-| rbrtbrnschn 	| node-js-api-101 	| [URL](https://github.com/codingthrone/courses/tree/rbrtbrnschn/node-js-api-101/src) 	|  	|  	|
+| rbrtbrnschn 	| node-js-api-101 	| 10 	| [URL](https://github.com/codingthrone/courses/tree/rbrtbrnschn/node-js-api-101/src) 	|  	|
 |  	|  	|  	|  	|  	|
 |  	|  	|  	|  	|  	|
 |  	|  	|  	|  	|  	|

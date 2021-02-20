@@ -1,6 +1,8 @@
 = Node-Js Api 101
 :course-name: Node-js Api 101
 :author: Robert Bornschein
+:local: http://localhost:3000
+:repl: https://repl.it/@rbrtbrnschn
 
 == Table of contents
 
@@ -12,10 +14,10 @@
 . <<Whats an api, What's an api>>
     ... <<Simply put>>
     ... <<Good to know>>
-. <<Let's get coding>>
+. <<Lets get coding>>
     ... <<Hello world>>
     ... <<Get & Post>>
-    ... <<Put-Patch-Delete & Options>>
+    ... <<Put Patch Delete & Options>>
     ... <<Parameters>>
     ... <<Query>>
     ... <<Cookies>>
@@ -110,6 +112,92 @@ An API always has a setup of endpoints. To understand an endpoint think of it li
 == Good to know
 // I dont even know
 
-= Let's get coding
+= Lets get coding
 
 == Hello world
+
+```js
+/* Basic Routing: Accessible on http://localhost:3000/ */
+/* Simple GET request */
+app.get("/", (req,res) => {
+    res.status(200).send("Hello World!");
+})
+
+/* Simple POST request */
+app.post("/", (req,res) => {
+    /* Access sent along data. */
+    console.log(req.body)
+    /* Access client's cookies */
+    console.log(req.cookies);
+    res.cookie("newCookie","newCookieValue", {maxAge: 3000});
+    const objectOfYourChoice = {sample: true, error: "none"};
+    return res.json(objectOfYourChoice);
+})
+```
+
+Routes is a fairly simple topic. Once you host your api, you can reach it under all the endpoints you set up.
+Endpoints are all the routes that you have setup. For example, we just setup our root path, meaning anyone who would go to {local}, would see the `Hello World`.
+With the browser you can only ever *see* GET requests. 
+We are currently hosting to endpoints on the same route ("/").
+The one (GET) is globally accessible by browsers. The second (POST) is not.
+Why is that you may ask?
+
+== Get & Post
+
+You see, when your browser is navigating to {local}, you will see the `Hello World` message printed to your screen. Once you reach an endpoint like a url, all the browser wants to do is *GET* the information on the site or the api. It doesn't care about what you can possibly *POST*.
+This is where the client comes into play. You can use this *POST* mapping to communicate with your API. More often than not, APIs are used for authentication purposes.
+With the example above you could possibly see how that would be done.
+Within the endpoint for the *POST* mapping for "/", we can clearly access the users cookies and also set new ones. We also have access to what is called the "body" of a request.
+This is where the user would send their password and username for example.
+
+This way authentication is pretty simple. All you have to do is access your _database_, query for the username and see if the passwords match.
+If so - great - set a new cookie on the user, so we will know he is properly authenticated.
+If not you could simply return a bad status code like so `return res.status(403);`, meaing *FORBIDDEN*.
+
+In general *GET* requests are used to, well get information. This doesn't necessarily have to html. It may also be a certain property within your database.
+*POST* requests on the other hand will allow you to give along information, this opens up a lot of opportunities for you. This allows saving new data, as well as manipulating already exisitng data and so on.
+
+== Put Patch Delete & Options
+
+Technically there are 6 different kind of requests, whereas we have already covered _two_ in greater detail.
+You also have *PUT, PATH & DELETE* request as far as our _normal_ one's go.
+Those are similar to the already covered *POST* request.
+
+*PUT* puts a data, such as a file or any other kind of resource at a specific URI. Also, it will replace the already exisiting file, if a new *PUT* request is sent. If there is no exisitng file, it will create one.
+
+*PATCH* patches up exisiting data, it simply edits pre-exisiting files or data. It's really used to make minor updates.
+
+*DELETE* should be self explanatory.
+
+We do also have another one called *Options*, which will not go into any further detail on. Feel free to checkout [this resource](https://www.baeldung.com/cs/why-options-request-sent) on it, if you fancy.
+
+
+== Parameters 
+
+Paramters can be used within routes as well.
+Say for example you don't want to print `Hello World`,
+but rather `Hello Peter`, or the name of the user.
+
+It's rather simple to add that in. Take a look.
+
+```js
+app.get("/hello/:name", (req, res) => {
+    const {params} = req;
+    res.send(`Hello ${params.name}.`);
+}) 
+```
+You simply add a ":" infront of the pathname. You can also add a "?" at the end to make it optional.
+```js
+app.get("/hello/:name/:optional?", (req,res) => {
+  const {params} = req;
+  const base = `Hello ${params.name}.`;
+  let message = base;
+  if(params.optional) {
+    message += `\n How are you ${params.optional}?`
+  } 
+  return res.send(message);
+})
+```
+
+== Query
+

@@ -69,3 +69,4 @@ const fs = require('fs');
 //command handler
 ```
 After doing so go ahead and make a ```commands``` folder in your bot folder.
+This is where all the command files will be stored.

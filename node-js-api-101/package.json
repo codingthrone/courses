@@ -4,7 +4,8 @@
   "description": "How to build an api with node js. Beginners guide to backend development.",
   "main": "index.js",
   "scripts": {
-    "test": "exit 0"
+    "test": "exit 0",
+    "build": "node ./scripts/build.js"
   },
   "repository": {
     "type": "git",

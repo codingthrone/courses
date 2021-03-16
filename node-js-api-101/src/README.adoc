@@ -24,7 +24,7 @@
     ... <<Databases>>
     ... <<Node-Fetch>>
 
-= Setup
+== Setup
 
 == Installing Node-Js
 
@@ -80,7 +80,7 @@ const callback = (port) => console.log(`Running on port: ${port}`);
 app.listen(port, callback(port));
 ```
 
-= Npm scripts
+== Npm scripts
 
 == package.json 
 ```json
@@ -95,7 +95,7 @@ Nodemon restarts the server any time it detects a changed file. Meaning any time
 
 To start working it, run `npm run dev`.
 
-= Whats an api
+== Whats an api
 
 == Simply put
 An api is simply an endpoint invisible to the day to day user, which usually communicates with your front end application (anything you can see on your screen).
@@ -109,10 +109,10 @@ If it were anything else, the front application (your google login page), would 
 An API always has a setup of endpoints. To understand an endpoint think of it like the url of a website you visit.
 // example / and /user and so on
 
-== Good to know
+=== Good to know
 // I dont even know
 
-= Lets get coding
+== Lets get coding
 
 == Hello world
 
@@ -169,7 +169,7 @@ Those are similar to the already covered *POST* request.
 
 *DELETE* should be self explanatory.
 
-We do also have another one called *Options*, which will not go into any further detail on. Feel free to checkout [this resource](https://www.baeldung.com/cs/why-options-request-sent) on it, if you fancy.
+We do also have another one called *Options*, which will not go into any further detail on. Feel free to checkout https://www.baeldung.com/cs/why-options-request-sent[this resource] on it, if you fancy.
 
 
 == Parameters 
@@ -201,3 +201,65 @@ app.get("/hello/:name/:optional?", (req,res) => {
 
 == Query
 
+You may previously seen this kind of url +
+`https://youtube.com/search?q=Video+Name+Here`
+
+This part: `?q=Video` is the query.
+
+Why use a query? A query can be very dynamic, you can add all sorts of query options, making it perfect to give certain information to the backend.
+
+Example use cases would the Youtube search bar. 
+When you input your video name into it and hit enter or search, you will be redirected
+to the same domain (`https://youtube.com`), but this time it also adds a query to that base url.
+It may look something like in the example above.
+
+Queries are usually used in `GET` requests, but are not limited to them.
+
+To illustrate, say you have an array of user objects in your api code somewhere like so:
+
+```js
+const users = [{username: "pete"}, {username: "aubrey simmons"}, {username: "andrew"}];
+```
+
+Creating a get request that would return a single user, specified via query, may look like this.
+
+```js
+app.get("/users", (req,res) => {
+    const {username} = req.query;
+    return res.json(users.find((user) => user.username === username));
+})
+```
+Unlike with paramters, you do not see them and thereby define them in the `path`. Meaning, you needn't add anything to `/users`. 
+That is the route, any query is only an addition.
+
+Now to get the user object with the `username` of "andrew" you would go to +
+{local}/users?username=andrew&secondQuery=here
+
+Say you want to search for `aubrey simmons`. Now that is a different story.
+
+=== Url Encoding
+
+There are only so many characters allowed in a `url`. A whitespace or space, is not permitted. Enter `url encoding`.
+
+For example, to encode a whitespace in a url like `aubrey simmons`, we would have to write `aubrey%20simmons` or `aubrey+simmons`. Either will do the job.
+
+Urls only accept alphanumerical characters as well as a set of 40 something reserved characters like `+` and `-` for example.
+
+== Cookies
+
+=== What are cookies.
+
+> Cookies are usually small text files, given ID tags that are stored on your computer's browser directory or program data subfolders.
+
+> Cookies are created when you use your browser to visit a website that uses cookies to keep track of your movements within the site, help you resume where you left off, remember your registered login, theme selection, preferences, and other customization functions.
+
+=== Now how do we create some cookies?
+
+```js
+app.get("/cookie", (req,res)=>{
+    const options = {expires: Date.now()+3e5}
+    res.cookie("name",...options);
+})
+
+
+```

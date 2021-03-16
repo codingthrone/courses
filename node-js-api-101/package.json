@@ -30,6 +30,7 @@
   "homepage": "https://github.com/codingthrone/courses#readme",
   "devDependencies": {
     "asciidoctor": "^2.2.1",
+    "husky": "^4.0.10",
     "pretty": "^2.0.0"
   }
 }

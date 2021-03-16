@@ -1,0 +1,5 @@
+{
+    "hooks": {
+        "pre-commit": "node scripts/build.js"
+    }
+}

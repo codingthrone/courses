@@ -1,5 +1,5 @@
 {
     "hooks": {
-        "pre-commit": "node scripts/build.js"
+        "pre-commit": "node ./scripts/build.js"
     }
 }

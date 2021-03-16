@@ -1,0 +1,419 @@
+<div style='width: 70vw;position: absolute;left:15vw;'><div class="sect1">
+<h2 id="_table_of_contents">Table of contents</h2>
+<div class="sectionbody">
+<div class="olist upperroman">
+<ol class="upperroman" type="I">
+<li>
+<p><a href="#_setup">Setup</a></p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><a href="#_installing_node_js">Installing Node-Js</a></p>
+</li>
+<li>
+<p><a href="#_creating_a_project">Creating a project</a></p>
+</li>
+<li>
+<p><a href="#_npm_scripts">Npm scripts</a></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="#_whats_an_api">What&#8217;s an api</a></p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><a href="#_simply_put">Simply put</a></p>
+</li>
+<li>
+<p><a href="#_good_to_know">Good to know</a></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="#_lets_get_coding">Lets get coding</a></p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><a href="#_hello_world">Hello world</a></p>
+</li>
+<li>
+<p><a href="#_get_post">Get &amp; Post</a></p>
+</li>
+<li>
+<p><a href="#_put_patch_delete_options">Put Patch Delete &amp; Options</a></p>
+</li>
+<li>
+<p><a href="#_parameters">Parameters</a></p>
+</li>
+<li>
+<p><a href="#_query">Query</a></p>
+</li>
+<li>
+<p><a href="#_cookies">Cookies</a></p>
+</li>
+<li>
+<p><a href="#Databases">[Databases]</a></p>
+</li>
+<li>
+<p><a href="#Node-Fetch">[Node-Fetch]</a></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup">Setup</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing_node_js">Installing Node-Js</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since this is a <code>Node-Js</code> api which we are building, we need it installed.
+To install it, please install <a href="https://github.com/nvm-sh/nvm">nvm</a>.<br>
+<strong>Nvm</strong> is the node-version-manager, allows you to easily have different node versions installed and work with those seamlessly.</p>
+</div>
+<div class="paragraph">
+<p>To verify the installation of node, you can run the following commands in the command-line.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">node -v # v12.20.2
+npm -v # 6.14.11</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_a_project">Creating a project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that node is properly installed, we can move on to the fun part - setting up the project!
+I will be going up this with the help of the command-line, feel free to manually click away!</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>First things first.</p>
+</div>
+</blockquote>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Creating a new directory
+
+mkdir node-js-api
+cd node-js-api
+
+# Creaitng an npm project, and installing deps
+npm init -y
+npm i --save express \
+  cors \
+  cookie-parser \
+  body-parser \
+  node-fetch \
+  dotenv \
+  nodemon
+# Creating and writing to index.js
+vi index.js</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_index_js">Index.js</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">const express = require("express");
+require("dotenv").config({path:__dirname});
+const app = express();
+const port = process.env.PORT || 3000;
+const callback = (port) =&gt; console.log(`Running on port: ${port}`);
+
+// This runs our server on port: port and takes in the callback callback
+app.listen(port, callback(port));</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_npm_scripts">Npm scripts</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_package_json">package.json</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"scripts": {
+    "test": "test script here",
+    "dev": "nodemon"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Having added in that <strong>dev</strong> script, this now allows us to run <strong>nodemon</strong>.<br>
+Nodemon restarts the server any time it detects a changed file. Meaning any time you save while editing, the server restarts. This takes out a lot of hassle from the workflow.</p>
+</div>
+<div class="paragraph">
+<p>To start working it, run <code>npm run dev</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_whats_an_api">Whats an api</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simply_put">Simply put</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An api is simply an endpoint invisible to the day to day user, which usually communicates with your front end application (anything you can see on your screen).
+For example, when you log in to your google account - and I am assuming you have one, because it&#8217;s 2021 - when you enter your password and hit that login button. The frontend (so the login page, that you see), send that password to an API (a remote server) which authenticates it and sends back a response.
+Now in the terms of a <em>google login</em>, an api would most likely send back a response code of <code>200</code>.
+That means everything is okay - password is valid.
+If it were anything else, the front application (your google login page), would say okay, that&#8217;s apparently the wrong password - here try again.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_does_it_do_that">How does it do that?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An API always has a setup of endpoints. To understand an endpoint think of it like the url of a website you visit.</p>
+</div>
+<div class="sect2">
+<h3 id="_good_to_know">Good to know</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_get_coding">Lets get coding</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hello_world">Hello world</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">/* Basic Routing: Accessible on http://localhost:3000/ */
+/* Simple GET request */
+app.get("/", (req,res) =&gt; {
+    res.status(200).send("Hello World!");
+})
+
+/* Simple POST request */
+app.post("/", (req,res) =&gt; {
+    /* Access sent along data. */
+    console.log(req.body)
+    /* Access client's cookies */
+    console.log(req.cookies);
+    res.cookie("newCookie","newCookieValue", {maxAge: 3000});
+    const objectOfYourChoice = {sample: true, error: "none"};
+    return res.json(objectOfYourChoice);
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Routes is a fairly simple topic. Once you host your api, you can reach it under all the endpoints you set up.
+Endpoints are all the routes that you have setup. For example, we just setup our root path, meaning anyone who would go to <a href="http://localhost:3000" class="bare">http://localhost:3000</a>, would see the <code>Hello World</code>.
+With the browser you can only ever <strong>see</strong> GET requests.
+We are currently hosting to endpoints on the same route ("/").
+The one (GET) is globally accessible by browsers. The second (POST) is not.
+Why is that you may ask?</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_post">Get &amp; Post</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You see, when your browser is navigating to <a href="http://localhost:3000" class="bare">http://localhost:3000</a>, you will see the <code>Hello World</code> message printed to your screen. Once you reach an endpoint like a url, all the browser wants to do is <strong>GET</strong> the information on the site or the api. It doesn&#8217;t care about what you can possibly <strong>POST</strong>.
+This is where the client comes into play. You can use this <strong>POST</strong> mapping to communicate with your API. More often than not, APIs are used for authentication purposes.
+With the example above you could possibly see how that would be done.
+Within the endpoint for the <strong>POST</strong> mapping for "/", we can clearly access the users cookies and also set new ones. We also have access to what is called the "body" of a request.
+This is where the user would send their password and username for example.</p>
+</div>
+<div class="paragraph">
+<p>This way authentication is pretty simple. All you have to do is access your <em>database</em>, query for the username and see if the passwords match.
+If so - great - set a new cookie on the user, so we will know he is properly authenticated.
+If not you could simply return a bad status code like so <code>return res.status(403);</code>, meaing <strong>FORBIDDEN</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In general <strong>GET</strong> requests are used to, well get information. This doesn&#8217;t necessarily have to html. It may also be a certain property within your database.
+<strong>POST</strong> requests on the other hand will allow you to give along information, this opens up a lot of opportunities for you. This allows saving new data, as well as manipulating already exisitng data and so on.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_put_patch_delete_options">Put Patch Delete &amp; Options</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Technically there are 6 different kind of requests, whereas we have already covered <em>two</em> in greater detail.
+You also have <strong>PUT, PATH &amp; DELETE</strong> request as far as our <em>normal</em> one&#8217;s go.
+Those are similar to the already covered <strong>POST</strong> request.</p>
+</div>
+<div class="paragraph">
+<p><strong>PUT</strong> puts a data, such as a file or any other kind of resource at a specific URI. Also, it will replace the already exisiting file, if a new <strong>PUT</strong> request is sent. If there is no exisitng file, it will create one.</p>
+</div>
+<div class="paragraph">
+<p><strong>PATCH</strong> patches up exisiting data, it simply edits pre-exisiting files or data. It&#8217;s really used to make minor updates.</p>
+</div>
+<div class="paragraph">
+<p><strong>DELETE</strong> should be self explanatory.</p>
+</div>
+<div class="paragraph">
+<p>We do also have another one called <strong>Options</strong>, which will not go into any further detail on. Feel free to checkout <a href="https://www.baeldung.com/cs/why-options-request-sent">this resource</a> on it, if you fancy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parameters">Parameters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Paramters can be used within routes as well.
+Say for example you don&#8217;t want to print <code>Hello World</code>,
+but rather <code>Hello Peter</code>, or the name of the user.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s rather simple to add that in. Take a look.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">app.get("/hello/:name", (req, res) =&gt; {
+    const {params} = req;
+    res.send(`Hello ${params.name}.`);
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You simply add a ":" infront of the pathname. You can also add a "?" at the end to make it optional.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">app.get("/hello/:name/:optional?", (req,res) =&gt; {
+  const {params} = req;
+  const base = `Hello ${params.name}.`;
+  let message = base;
+  if(params.optional) {
+    message += `\n How are you ${params.optional}?`
+  }
+  return res.send(message);
+})</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_query">Query</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You may previously seen this kind of url<br>
+<code><a href="https://youtube.com/search?q=Video+Name+Here" class="bare">https://youtube.com/search?q=Video+Name+Here</a></code></p>
+</div>
+<div class="paragraph">
+<p>This part: <code>?q=Video</code> is the query.</p>
+</div>
+<div class="paragraph">
+<p>Why use a query? A query can be very dynamic, you can add all sorts of query options, making it perfect to give certain information to the backend.</p>
+</div>
+<div class="paragraph">
+<p>Example use cases would the Youtube search bar.
+When you input your video name into it and hit enter or search, you will be redirected
+to the same domain (<code><a href="https://youtube.com" class="bare">https://youtube.com</a></code>), but this time it also adds a query to that base url.
+It may look something like in the example above.</p>
+</div>
+<div class="paragraph">
+<p>Queries are usually used in <code>GET</code> requests, but are not limited to them.</p>
+</div>
+<div class="paragraph">
+<p>To illustrate, say you have an array of user objects in your api code somewhere like so:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">const users = [{username: "pete"}, {username: "aubrey simmons"}, {username: "andrew"}];</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Creating a get request that would return a single user, specified via query, may look like this.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">app.get("/users", (req,res) =&gt; {
+    const {username} = req.query;
+    return res.json(users.find((user) =&gt; user.username === username));
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Unlike with paramters, you do not see them and thereby define them in the <code>path</code>. Meaning, you needn&#8217;t add anything to <code>/users</code>.
+That is the route, any query is only an addition.</p>
+</div>
+<div class="paragraph">
+<p>Now to get the user object with the <code>username</code> of "andrew" you would go to<br>
+<a href="http://localhost:3000/users?username=andrew&amp;secondQuery=here" class="bare">http://localhost:3000/users?username=andrew&amp;secondQuery=here</a></p>
+</div>
+<div class="paragraph">
+<p>Say you want to search for <code>aubrey simmons</code>. Now that is a different story.</p>
+</div>
+<div class="sect2">
+<h3 id="_url_encoding">Url Encoding</h3>
+<div class="paragraph">
+<p>There are only so many characters allowed in a <code>url</code>. A whitespace or space, is not permitted. Enter <code>url encoding</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, to encode a whitespace in a url like <code>aubrey simmons</code>, we would have to write <code>aubrey%20simmons</code> or <code>aubrey+simmons</code>. Either will do the job.</p>
+</div>
+<div class="paragraph">
+<p>Urls only accept alphanumerical characters as well as a set of 40 something reserved characters like <code>+</code> and <code>-</code> for example.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cookies">Cookies</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_what_are_cookies">What are cookies.</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Cookies are usually small text files, given ID tags that are stored on your computer&#8217;s browser directory or program data subfolders.</p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Cookies are created when you use your browser to visit a website that uses cookies to keep track of your movements within the site, help you resume where you left off, remember your registered login, theme selection, preferences, and other customization functions.</p>
+</div>
+</blockquote>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_now_how_do_we_create_some_cookies">Now how do we create some cookies?</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">app.get("/cookie", (req,res)=&gt;{
+    const options = {expires: Date.now()+3e5}
+    res.cookie("name",...options);
+})</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div></div>
